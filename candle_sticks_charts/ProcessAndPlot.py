@@ -4,9 +4,15 @@ from mplfinance import plot
 
 import matplotlib.pyplot as plt
 
+
+
+
+
+
+
 stock_name = "ITC"
 
-df = read_csv(f'Data\{stock_name}.csv', skiprows=3)
+df = read_csv(f'candle_stick_charts\Data\{stock_name}.csv', skiprows=3)
 df.columns = ['Date', 'AdjClose','Close', 'High', 'Low', 'Open', 'Volume']
 
 df['Date'] = to_datetime(df['Date'])
