@@ -59,5 +59,20 @@ sudo chmod +x /usr/bin/hid-gadget-setup.sh
 
 sudo /usr/bin/hid-gadget-setup.sh
 
+#################
+
+sudo mknod /dev/hidg0 c 239 0
+sudo chmod 666 /dev/hidg0
+
+
+############# to re-setup
+cd /configfs/usb_gadget
+sudo rm -rf keyboard
+sudo reboot
+
+
+
+
+
 
 
