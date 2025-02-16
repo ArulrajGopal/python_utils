@@ -27,6 +27,8 @@ modules-load=dwc2,g_hid
 
 sudo nano /usr/bin/hid-gadget-setup.sh
 
+###################################
+
 #!/bin/bash
 cd /sys/kernel/config/usb_gadget/
 mkdir -p hid_gadget
@@ -54,6 +56,8 @@ echo -ne \\x05\\x01\\x09\\x02\\xa1\\x01\\x05\\x09\\x19\\x01\\x29\\x03\\x15\\x00\
 
 ln -s functions/hid.usb0 configs/c.1/
 ls /sys/class/udc > UDC
+
+###################################
 
 sudo chmod +x /usr/bin/hid-gadget-setup.sh
 
