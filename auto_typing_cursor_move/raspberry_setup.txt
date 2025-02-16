@@ -59,7 +59,19 @@ sudo chmod +x /usr/bin/hid-gadget-setup.sh
 
 sudo /usr/bin/hid-gadget-setup.sh
 
+ls /dev/hidg*
+
 #################
+
+### validation - the below should return values
+
+mount | grep configfs
+
+lsmod | grep dwc2
+
+ls /sys/class/udc
+
+### after these validations, if still /dev/hidg* not found the create manually by below commands
 
 sudo mknod /dev/hidg0 c 239 0
 sudo chmod 666 /dev/hidg0
