@@ -81,6 +81,8 @@ sudo chmod 666 /dev/hidg0
 
 echo -ne "\x00\x00\x04\x00\x00\x00\x00\x00" | sudo tee /dev/hidg0
 
+echo -ne "\x00\x00\x04\x00\x00\x00\x00\x00" | sudo dd of=/dev/hidg0 bs=8
+
 
 ############# to re-setup
 cd /configfs/usb_gadget
