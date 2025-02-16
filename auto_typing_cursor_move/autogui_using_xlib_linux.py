@@ -1,31 +1,38 @@
-from Xlib import X, display
-from Xlib.ext import xtest
+from Xlib import X, display, XK, ext
 import time
+import random
 
-# Function to move cursor to (x, y) position
-def move_cursor(x, y):
-    d = display.Display()
+def move_to(x,y):
+    d = display.Display() 
     root = d.screen().root
-    root.warp_pointer(x, y)
+    root.warp_pointer(x,y)
     d.sync()
 
-# Function to simulate key press and release
-def type_text(text, delay=0.1):
+def write(letter):
     d = display.Display()
-    for char in text:
-        keysym = ord(char)  # Convert character to key symbol
-        xtest.fake_input(d, X.KeyPress, keysym)
-        xtest.fake_input(d, X.KeyRelease, keysym)
-        d.sync()
-        time.sleep(delay)
+    keycode = d.keysym_to_keycode(XK.string_to_keysym(letter))
+    ext.xtest.fake_input(d, X.KeyPress, keycode)
+    ext.xtest.fake_input(d, X.KeyRelease, keycode)
+    d.sync() 
 
-# Example Usage
-if __name__ == "__main__":
-    time.sleep(2)  # Wait 2 seconds before executing
 
-    # Move the cursor to a specific position
-    move_cursor(500, 500)
-    time.sleep(1)
+def perform_action():
+    letter = random.choice("abcdefghijklmnopqrstuvwxyz")
+    
+    d = display.Display()
+    screen = d.screen()
+    screen_width = screen.width_in_pixels
+    screen_height = screen.height_in_pixels
+    
+    random_x = random.randint(0, screen_width)
+    random_y = random.randint(0, screen_height)
+    
+    move_to(random_x,random_y)
+    write(letter)
+    
+    print(f"Typed '{letter}' and moved the cursor to ({random_x},{random_y})")
+    
+while True:
+    time.sleep(10)
+    perform_action()
 
-    # Auto type "Hello, Linux!"
-    type_text("Hello, Linux!", delay=0.2)
