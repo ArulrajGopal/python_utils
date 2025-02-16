@@ -77,6 +77,11 @@ sudo mknod /dev/hidg0 c 239 0
 sudo chmod 666 /dev/hidg0
 
 
+############ this should type "A" in windows machine
+
+echo -ne "\x00\x00\x04\x00\x00\x00\x00\x00" | sudo tee /dev/hidg0
+
+
 ############# to re-setup
 cd /configfs/usb_gadget
 sudo rm -rf keyboard
