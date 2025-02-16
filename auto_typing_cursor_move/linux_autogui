@@ -1,0 +1,34 @@
+###setup pyautogui and python-xlib
+
+https://github.com/asweigart/pyautogui.git
+
+https://github.com/python-xlib/python-xlib.git
+
+export PYTHONPATH=$PYTHONPATH:/home/Arulraj/Desktop/pyautogui/:/home/Arulraj/Desktop/python-xlib/
+
+
+Linux - Potential failure causes
+echo $XDG_SESSION_TYPE
+
+If it prints wayland, warp_pointer won’t work. You must use Xorg instead.
+
+Temporary Switch to Xorg (For Current Session Only)
+1.Log Out of your current session.
+2.On the login screen, click your username.
+3.Look for a settings ⚙️ or gear icon at the bottom-right or top-right corner.
+4.Select "Xorg", "X11", or "Ubuntu on Xorg" (the exact option depends on your Linux distro).
+5.Log back in.
+
+Permanent solution
+sudo nano /etc/gdm/custom.conf
+find the line
+#WaylandEnable=false
+uncomment it
+WaylandEnable=false
+
+sudo reboot
+
+Verify it --> 
+echo $XDG_SESSION_TYPE
+
+should print x11
